@@ -22,5 +22,19 @@ class ReqResServices
       end
       result = JSON.parse(resp.body)
     end
+
+    def create_user name:, job:
+      body_hash = {
+        "name": name,
+        "job": job
+      }.to_json
+      conn = Faraday.new
+      resp = conn.post do |req|
+        req.url "https://reqres.in/api/users"
+        req.headers['Content-Type'] = 'application/json'
+        req.body = body_hash
+      end
+      result = JSON.parse(resp.body)
+    end
   end
 end
