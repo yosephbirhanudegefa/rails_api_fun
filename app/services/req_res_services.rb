@@ -13,5 +13,14 @@ class ReqResServices
       end
       result = JSON.parse(resp.body)
     end
+
+    def get_user user_id:
+      conn = Faraday.new
+      resp = conn.get do |req|
+        req.url "https://reqres.in/api/users/#{user_id}"
+        req.headers['Content-Type'] = 'application/json'
+      end
+      result = JSON.parse(resp.body)
+    end
   end
 end
