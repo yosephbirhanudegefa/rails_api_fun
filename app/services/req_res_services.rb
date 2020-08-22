@@ -51,5 +51,15 @@ class ReqResServices
       end
       result = JSON.parse(resp.body)
     end
+
+    def destroy_user user_id:
+      user = get_user user_id: user_id
+      if user.present?
+        conn = Faraday.new
+        resp = conn.delete do |req|
+          req.url "https://reqres.in/api/users/#{user_id}"
+        end
+      end
+    end
   end
 end
