@@ -36,5 +36,20 @@ class ReqResServices
       end
       result = JSON.parse(resp.body)
     end
+
+    def update_user user_id:, name:, job:
+      user = get_user user_id: user_id
+      body_hash = {
+        "name": name,
+        "job": job
+      }.to_json
+      conn = Faraday.new
+      resp = conn.put do |req|
+        req.url "https://reqres.in/api/users/#{user_id}"
+        req.headers['Content-Type'] = 'application/json'
+        req.body = body_hash
+      end
+      result = JSON.parse(resp.body)
+    end
   end
 end
