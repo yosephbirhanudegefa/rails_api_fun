@@ -39,10 +39,24 @@ class ReqResServices
 
     def update_user user_id:, name:, job:
       user = get_user user_id: user_id
+      if name == nil
+        username = user.name
+      else
+        username = name
+      end
+
+      if job == nil
+        userjob = user.job
+      else
+        userjob = job
+      end
+
       body_hash = {
-        "name": name,
-        "job": job
+        "name": username,
+        "job": userjob
       }.to_json
+
+      puts body_hash
       conn = Faraday.new
       resp = conn.put do |req|
         req.url "https://reqres.in/api/users/#{user_id}"
