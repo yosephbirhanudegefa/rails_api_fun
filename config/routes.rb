@@ -5,4 +5,10 @@ Rails.application.routes.draw do
   post 'api/v1/users', to: 'api/v1/users#create'
   put 'api/v1/users/:id', to: 'api/v1/users#update'
   delete 'api/v1/users/:id', to: 'api/v1/users#destroy'
+
+  get 'api/v2/users', to: 'api/v2/restusers#index'
+  get 'api/v2/users/:id', to: 'api/v2/restusers#show'
+  post 'api/v2/users', to: 'api/v2/restusers#create'
+  put 'api/v2/users/:id', to: 'api/v2/restusers#update'
+  delete 'api/v2/users/:id', to: 'api/v2/restusers#destroy'
 end
